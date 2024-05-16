@@ -1,6 +1,8 @@
-### Hi there 👋
+시스템엔지니어가 사용하는 코드 저장소입니다.
+
 
 <!--
+### Hi there 👋
 **madmax490500/madmax490500** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
 Here are some ideas to get you started:
