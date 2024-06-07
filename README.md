@@ -1,6 +1,6 @@
 
 ### 시스템엔지니어가 사용하는 코드 저장소입니다.
-### This repository use by SRE.
+### This repository is used by SRE.
 
 ### 지속적인 목표 (SRE 목표)
 * 서비스의 안정성을 유지하면서 변화를 최대한 수용한다.
