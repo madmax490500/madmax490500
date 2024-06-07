@@ -36,7 +36,6 @@ jobs:
         python feed_tistory.py
     - name: Update README.md fileQ
       run: |
-        git reset --hard
         git pull
         git add .
         git config --local user.email "2523@naver.com"
