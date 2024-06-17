@@ -1,6 +1,6 @@
 import feedparser, time
 
-URL = "https://bitnaleeeee.github.io/feed.xml"
+URL = "https://vitta.tistory.com/rss"
 RSS_FEED = feedparser.parse(URL)
 MAX_POST = 5
 
