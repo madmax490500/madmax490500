@@ -1,10 +1,17 @@
-import feedparser, time
+import feedparser
+import time
+import os
 
+# Constants
 URL = "https://vitta.tistory.com/rss"
-RSS_FEED = feedparser.parse(URL)
 MAX_POST = 5
+README_FILE = "README.md"
 
-markdown_text = """
+# Parse the RSS feed
+RSS_FEED = feedparser.parse(URL)
+
+# Start building the markdown content
+new_markdown_text = """
 ### 시스템엔지니어가 사용하는 코드 저장소입니다.
 ### This repository use by SRE.
 
@@ -16,17 +23,31 @@ markdown_text = """
 * 수요를 예측하고, 계획을 세운다.
 * 이를 통해 서비스의 수용력을 확보하고, 효율성을 향상한다.
 
-
 ## ✅ Latest Blog Posts
-"""  # list of blog posts will be appended here
+"""
 
+# Add feed entries to the markdown
 for idx, feed in enumerate(RSS_FEED['entries']):
-    if idx > MAX_POST:
+    if idx >= MAX_POST:  # Include only up to MAX_POST entries
         break
-    else:
-        feed_date = feed['published_parsed']
-        markdown_text += f"[{time.strftime('%Y/%m/%d', feed_date)} - {feed['title']}]({feed['link']}) <br/>\n"
-        
-f = open("README.md", mode="w", encoding="utf-8")
-f.write(markdown_text)
-f.close()
+    feed_date = feed['published_parsed']
+    formatted_date = time.strftime('%Y/%m/%d', feed_date)
+    new_markdown_text += f"[{formatted_date} - {feed['title']}]({feed['link']}) <br/>\n"
+
+# Function to read the content of the existing README file
+def read_existing_readme(file_path):
+    if os.path.exists(file_path):
+        with open(file_path, mode="r", encoding="utf-8") as f:
+            return f.read()
+    return ""
+
+# Read the existing README.md content
+existing_markdown_text = read_existing_readme(README_FILE)
+
+# Compare and write to the README.md file only if there are changes
+if new_markdown_text.strip() != existing_markdown_text.strip():
+    with open(README_FILE, mode="w", encoding="utf-8") as f:
+        f.write(new_markdown_text)
+    print("README.md has been updated.")
+else:
+    print("No changes detected in the RSS feed. README.md remains the same.")
