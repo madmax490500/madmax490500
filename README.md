@@ -1,6 +1,7 @@
-**Last Updated:** 2024-08-19 06:22:42
+**Last Updated:** 2024-08-19 09:52:04
 
 
+[![Python application](https://github.com/madmax490500/madmax490500/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/madmax490500/madmax490500/actions/workflows/main.yml)
 ### 시스템엔지니어가 사용하는 코드 저장소입니다.
 ### This repository use by SRE.
 
