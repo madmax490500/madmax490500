@@ -32,7 +32,7 @@ for idx, feed in enumerate(RSS_FEED['entries']):
         break
     feed_date = feed['published_parsed']
     formatted_date = time.strftime('%Y/%m/%d', feed_date)
-    new_markdown_text += f"[{formatted_date} - {feed['title']}]({feed['link']}) <br/>\n"
+    new_markdown_text += f"- [{formatted_date} - {feed['title']}]({feed['link']})\n"
 
 # Add the "Last Updated" section with the current date and time
 last_updated_text = f"\n---\n**Last Updated:** {time.strftime('%Y-%m-%d %H:%M:%S')}\n"
