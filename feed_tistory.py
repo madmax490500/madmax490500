@@ -34,6 +34,9 @@ for idx, feed in enumerate(RSS_FEED['entries']):
     formatted_date = time.strftime('%Y/%m/%d', feed_date)
     new_markdown_text += f"[{formatted_date} - {feed['title']}]({feed['link']}) <br/>\n"
 
+# Add the "Last Updated" section with the current date and time
+last_updated_text = f"\n---\n**Last Updated:** {time.strftime('%Y-%m-%d %H:%M:%S')}\n"
+
 # Function to read the content of the existing README file
 def read_existing_readme(file_path):
     if os.path.exists(file_path):
@@ -50,4 +53,7 @@ if new_markdown_text.strip() != existing_markdown_text.strip():
         f.write(new_markdown_text)
     print("README.md has been updated.")
 else:
-    print("No changes detected in the RSS feed. README.md remains the same.")
+    # Even if there's no change in the RSS feed, update the last updated timestamp
+    with open(README_FILE, mode="w", encoding="utf-8") as f:
+        f.write(existing_markdown_text.strip() + last_updated_text)
+    print("No changes in RSS feed, but README.md 'Last Updated' timestamp has been refreshed.")
