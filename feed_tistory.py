@@ -10,11 +10,11 @@ README_FILE = "README.md"
 # Parse the RSS feed
 RSS_FEED = feedparser.parse(URL)
 
-# Add the "Last Updated" section with the current date and time
-last_updated_text = f"\n---\n**Last Updated:** {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+# Add the "Last Updated" section with the current date and time at the top
+last_updated_text = f"**Last Updated:** {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n"
 
 # Start building the markdown content
-new_markdown_text = """
+new_markdown_text = last_updated_text + """
 ### 시스템엔지니어가 사용하는 코드 저장소입니다.
 ### This repository use by SRE.
 
@@ -29,14 +29,13 @@ new_markdown_text = """
 ## ✅ Latest Blog Posts
 """
 
-# Add feed entries to the markdown
+# Add feed entries to the markdown using bullet points
 for idx, feed in enumerate(RSS_FEED['entries']):
     if idx >= MAX_POST:  # Include only up to MAX_POST entries
         break
     feed_date = feed['published_parsed']
     formatted_date = time.strftime('%Y/%m/%d', feed_date)
     new_markdown_text += f"- [{formatted_date} - {feed['title']}]({feed['link']})\n"
-
 
 # Function to read the content of the existing README file
 def read_existing_readme(file_path):
@@ -48,14 +47,14 @@ def read_existing_readme(file_path):
 # Read the existing README.md content
 existing_markdown_text = read_existing_readme(README_FILE)
 
-# Compare and write to the README.md file only if there are changes
+# Compare and write to the README.md file
 if new_markdown_text.strip() != existing_markdown_text.strip():
     with open(README_FILE, mode="w", encoding="utf-8") as f:
         f.write(new_markdown_text)
-    print("README.md has been updated.")
+    print("README.md has been updated with new RSS feed entries.")
 else:
     # If no changes, still update the "Last Updated" section at the top
     new_markdown_text = last_updated_text + existing_markdown_text.strip()
     with open(README_FILE, mode="w", encoding="utf-8") as f:
-        f.write(existing_markdown_text)
+        f.write(new_markdown_text)
     print("No changes in RSS feed, but README.md 'Last Updated' timestamp has been refreshed.")
