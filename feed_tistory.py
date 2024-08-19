@@ -15,6 +15,7 @@ last_updated_text = f"**Last Updated:** {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n
 
 # Start building the markdown content
 new_markdown_text = last_updated_text + """
+[![Python application](https://github.com/madmax490500/madmax490500/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/madmax490500/madmax490500/actions/workflows/main.yml)
 ### 시스템엔지니어가 사용하는 코드 저장소입니다.
 ### This repository use by SRE.
 
